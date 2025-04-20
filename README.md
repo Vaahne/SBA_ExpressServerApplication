@@ -14,7 +14,6 @@
  Customized error handling middleware to gracefully catch and respond to all application errors.
 ## Custome middleware 
     validating username
-    validating booktitle
     validating transaction type
 ## Template engine
  Dynamic page rendering using common layout structure
