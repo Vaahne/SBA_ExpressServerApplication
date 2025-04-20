@@ -103,7 +103,12 @@ function transactionHateoas(req,res){
             href: "/transactions/users/:userId",
             rel : "transactions",
             type: "GET"
-        }
+        },
+        {
+            href: "/transactions/books/:bookId",
+            rel : "transactions",
+            type: "GET"
+        }    
         ]
     })
 }
