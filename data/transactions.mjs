@@ -32,6 +32,12 @@ const transactions = [{
     userId: 7,
     bookId: 9,
     type: "return"
+},
+{
+    transaction_id :6,
+    userId: 2,
+    bookId: 10,
+    type: "return"
 }];
 
 

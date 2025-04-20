@@ -8,7 +8,9 @@ router.route('/').get(transactionController.allTransactions)
                   .post(transactionController.borrowOrReturn);
 
 router.route('/:id').get(transactionController.searchTransaction)
-                    .patch(validateType,transactionController.borrowOrReturn);                  
+                    .patch(validateType,transactionController.borrowOrReturn);    
+                    
+router.route('/users/:userId/transactions').get(transactionController.searchTransaction);
 
 export default router;
 
