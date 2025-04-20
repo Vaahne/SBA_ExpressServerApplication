@@ -110,6 +110,6 @@ function transactionHateoas(req,res){
             type: "GET"
         }    
         ]
-    })
+    });
 }
 export default { libraryHateoas,booksHateoas,userHateoas,transactionHateoas};
