@@ -33,6 +33,8 @@
  Used express-validator to validate the book title before performing any business logic.
 ## Transactions by userId
     /transactions/users/:userId 
+## Transactions by bookId
+    /transactions/books/:bookId 
 ## To Run
  npm i
  npm start
