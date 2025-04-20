@@ -80,11 +80,6 @@ function userHateoas(req,res){
                 href: "/lib/users/:userId",
                 rel : "users",
                 type: "DELETE"
-            },
-            {
-                href: "/users/:userId/transactions",
-                rel : "transactions",
-                type: "GET"
             }
         ]
     });
@@ -101,6 +96,11 @@ function transactionHateoas(req,res){
         },
         {
             href: "/lib/transactions/:id",
+            rel : "transactions",
+            type: "GET"
+        },
+        {
+            href: "/transactions/users/:userId",
             rel : "transactions",
             type: "GET"
         }

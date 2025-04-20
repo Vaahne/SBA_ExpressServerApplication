@@ -31,6 +31,7 @@
     /lib/users?user_id=1 - search a user
 ## input validation with express-validator
  Used express-validator to validate the book title before performing any business logic.
+## Transactions by userId
 ## To Run
  npm i
  npm start

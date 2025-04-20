@@ -10,7 +10,7 @@ router.route('/').get(transactionController.allTransactions)
 router.route('/:id').get(transactionController.searchTransaction)
                     .patch(validateType,transactionController.borrowOrReturn);    
                     
-router.route('/users/:userId/transactions').get(transactionController.searchTransaction);
+router.route('/transactions/users/:userId').get(transactionController.searchTransaction);
 
 export default router;
 
