@@ -32,10 +32,9 @@ async function optionsFunction(e){
     const selectedOption = e.target.value;
 
     switch(selectedOption){
-        case 'get':  // to get specific user 
+        case 'get':  
                     fetch('/lib/users').then(async(res) => {
                         const data = await res.json();
-                        // console.log(data);
                         createTable(data);
 
                     }).catch(err =>{

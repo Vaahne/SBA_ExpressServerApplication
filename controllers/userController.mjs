@@ -3,7 +3,6 @@ import users from '../data/users.mjs';
 // gets all users
 function allUsers(req,res){
     const {userId} = req.query;
-    console.log("Hello ",userId);
     if(userId){
         const user = users.find((b)=> b.userId == userId);
         if(user)
