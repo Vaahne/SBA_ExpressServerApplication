@@ -32,6 +32,7 @@
 ## input validation with express-validator
  Used express-validator to validate the book title before performing any business logic.
 ## Transactions by userId
+    /transactions/users/:userId 
 ## To Run
  npm i
  npm start
