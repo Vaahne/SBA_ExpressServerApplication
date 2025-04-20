@@ -11,6 +11,7 @@ router.route('/:id').get(transactionController.searchTransaction)
                     .patch(validateType,transactionController.borrowOrReturn);    
                     
 router.route('/transactions/users/:userId').get(transactionController.searchTransaction);
+router.route('/transactions/books/:bookId').get(transactionController.searchTransaction);
 
 export default router;
 

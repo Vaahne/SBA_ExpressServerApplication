@@ -33,10 +33,9 @@ app.get(/^\/lib\/book(?!s$).*/, hateoas.booksHateoas);
 app.get(/^\/lib\/user(?!s$).*/,hateoas.userHateoas);
 app.get(/^\/lib\/transaction(?!s$).*/,hateoas.transactionHateoas);
 
-// transaction by userId
+// transaction by userId or bookId
 app.get('/transactions/users/:userId',transactionRouter);
-
-
+app.get('/transactions/books/:bookId',transactionRouter);
 
 // using the view template http://localhost:3000/library
 app.get('/library',template.library);

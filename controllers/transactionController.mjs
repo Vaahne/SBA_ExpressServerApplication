@@ -40,12 +40,17 @@ function borrowOrReturn(req,res){
 function searchTransaction(req,res){
     const transaction_id = req.params.id;
     const userId = req.params.userId;
-    console.log(userId);
+    const bookId = req.params.bookId;
     if(userId){
         const transaction = transactions.filter((t)=> t.userId == userId);
-        console.log(transaction);
         if(transaction.length == 0)
-            return res.status(404).json(`No transactions for the given user`);
+            return res.status(404).json(`No transactions for the given userId`);
+        return res.status(200).json(transaction);    
+    }
+    if(bookId){
+        const transaction = transactions.filter((t)=> t.bookId == bookId);
+        if(transaction.length == 0)
+            return res.status(404).json(`No transactions for the given bookId`);
         return res.status(200).json(transaction);    
     }
 
