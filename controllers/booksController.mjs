@@ -1,4 +1,5 @@
 import books from '../data/books.mjs';
+import hateoas from '../hateoas/libraryHateoas.mjs'
 
 // returns all books or specific book based on query parameter
 function allbooks(req,res){
@@ -6,21 +7,38 @@ function allbooks(req,res){
 
     if(bookId){
         const book = books.find((b) => b.bookId == bookId);
-        if(book)
-            return res.status(200).json(book);
+        if(book){
+            return res.status(200).json({
+                ...book,
+                _links : hateoas.getBookLinks(bookId)
+            });
+        }
         return res.send(404).json(`Book not found!!!!`);
     } 
 
-    return res.json(books);
+    const bookWithLinks = books.map((b)=>({
+        ...b,
+        _links:{
+            href: `/lib/books/${b.bookId}`
+        }
+    }));
+
+    return res.json({
+        books: bookWithLinks,
+        _links: hateoas.booksHateoas()
+    });
 }
 // Returns/gets specific book based on bookId (:id)
 function specificBook(req,res,next){
     const id = req.params.id;
-    
     if(id){
         const book = books.find((b)=> b.bookId == id);
+        console.log("specifif book",book);
         if(book)
-            return res.status(200).json(book);
+            return res.status(200).json({
+                ...book,
+                _links: hateoas.getBookLinks(id)
+            });
     }
     return res.status(404).json("Book not Found in the library");
 }

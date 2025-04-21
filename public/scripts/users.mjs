@@ -35,7 +35,7 @@ async function optionsFunction(e){
         case 'get':  
                     fetch('/lib/users').then(async(res) => {
                         const data = await res.json();
-                        createTable(data);
+                        createTable(data.users);
 
                     }).catch(err =>{
                         console.log(err.message);

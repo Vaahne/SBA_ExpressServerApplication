@@ -1,15 +1,31 @@
 import users from '../data/users.mjs';
+import hateoas from '../hateoas/libraryHateoas.mjs'
 
 // gets all users
 function allUsers(req,res){
     const {userId} = req.query;
     if(userId){
         const user = users.find((b)=> b.userId == userId);
-        if(user)
-            return res.status(200).json(user);
+        if(user){
+            return res.status(200).json({
+                            ...user,
+                            _links : hateoas.getUserLinks(userId)
+                        });
+        }
         return res.status(404).json(`User not found`);
     } 
-    res.json(users);
+
+    const userWithLinks = users.map((b)=>({
+        ...b,
+        _links:{
+            href: `/lib/books/${b.userId}`
+        }
+    }));
+
+    return res.json({
+            users: userWithLinks,
+            _links: hateoas.userHateoas()
+        });
 }
 
 // get a user by userid
@@ -19,7 +35,10 @@ function specificUser(req,res,next){
     if(id){
         const user = users.find((b)=> b.userId == id);
         if(user)
-            return res.status(200).json(user);
+            return res.status(200).json({
+                            ...user,
+                            _links: hateoas.getUserLinks(id)
+                        });
         return res.status(404).json(`User not found`);
     }
     return res.json("User not Found !!")

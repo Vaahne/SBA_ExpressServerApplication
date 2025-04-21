@@ -9,7 +9,7 @@
     <nav>
         <a href="/library">Library</a>
         <a href="/lib/booksView">Books</a>
-        <a href="/lib/users">Users</a>
+        <a href="/lib/usersView">Users</a>
     </nav>
     <h1 class="titleClass">#title#</h1>
     <div id="app">

@@ -12,7 +12,6 @@ formId.addEventListener('submit',async (e)=>{
     if(val!= ""){
         let res = await fetch(`/lib/books/${val}`);
         const data = await res.json();
-        console.log(`${data}`)
         if(typeof data != "string"){
             createTable([data]);
         }else{
@@ -36,7 +35,7 @@ async function optionsFunction(e){
         case 'get':  // to get the specific book
                     fetch('/lib/books').then(async(res) => {
                         const data = await res.json();
-                        createTable(data);
+                        createTable(data.books);
 
                     }).catch(err =>{
                         console.log(err.message);
@@ -178,6 +177,8 @@ function createTable(data){
     trHeader.appendChild(td1Header);
     trHeader.appendChild(td2Header);
     table.appendChild(trHeader);
+
+    console.log(data);
 
     data.forEach(element => {
         const tr = document.createElement("tr");

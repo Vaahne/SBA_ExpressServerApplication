@@ -1,4 +1,5 @@
 import transactions from "../data/transactions.mjs";
+import hateoas from '../hateoas/libraryHateoas.mjs';
 
 // returns or gets all transactions
 function allTransactions(req,res){
@@ -6,11 +7,26 @@ function allTransactions(req,res){
     
     if(transaction_id){
         const transaction = transactions.find((t)=> t.transaction_id == transaction_id);
-        if(transaction)
-            return res.json(transaction);
+        if(transaction){
+            return res.json({
+                ...transaction,
+                _links : hateoas.getTransactionLinks(transaction_id)
+            });
+        }
         return res.status(404).json("Transaction not found");
     }
-    return res.json(transactions);
+
+    const transationsWithLinks = transactions.map((t) => ({
+        ...t,
+        _links : {
+            href: `/lib/transactions/${t.transaction_id}`}
+    }))
+
+
+    return res.json({
+        transactions: transationsWithLinks,
+        _links : hateoas.transactionHateoas()
+    });
 }
 // updates/patches a transaction based on the transaction_Id
 function borrowOrReturn(req,res){
@@ -32,7 +48,8 @@ function borrowOrReturn(req,res){
     
     return res.json({ 
         message: "Transaction successfully updated",
-        transaction:   transaction
+        transaction:   transaction,
+        hateoas: hateoas.transactionHateoas
     });
 }
 
@@ -57,10 +74,13 @@ function searchTransaction(req,res){
 
     if(!transaction_id)
         return res.status(400).json(`Empty Transaction id`);
-
+    console.log(hateoas.transactionHateoas);
     const transaction = transactions.find((t)=> t.transaction_id == transaction_id);
-    if(transaction)
-        return res.json(transaction);
+    if(transaction){
+        return res.json({
+            ...transaction,
+            _links: hateoas.getTransactionLinks(transaction_id)});
+    }
     return res.status(404).json("Transaction not found");
 }
 

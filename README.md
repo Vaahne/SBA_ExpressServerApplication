@@ -5,8 +5,8 @@
  All CRUD operations and get all
     using UI (used template view engine)
     using thunderclient
-## RegEx handling with Hateoas support
- Implemented HATEOAS by adding navigational links to every resource in API responses.
+##  Handling with Hateoas support
+ Implemented HATEOAS by adding navigational links to every resource in API responses for get and get all.
 ## Access
  Interactive UI (Template Engine powered)
  Thunder Client(API testing)

@@ -26,9 +26,8 @@ function libraryHateoas(req, res){
     });
 }
 //  links for books
-function booksHateoas(req,res){
-    return res.json({
-        links: [
+function booksHateoas(){
+    return  [
             {
                 href: "/lib/books",
                 rel : "books",
@@ -55,12 +54,10 @@ function booksHateoas(req,res){
                 type: "DELETE"
             }
         ]
-    });
 }
 // links for users
 function userHateoas(req,res){
-    return res.json({
-        links: [
+    return  [
             {
                 href: "/lib/users",
                 rel : "users",
@@ -82,13 +79,11 @@ function userHateoas(req,res){
                 type: "DELETE"
             }
         ]
-    });
 }
 
 // links for transactions
-function transactionHateoas(req,res){
-    return res.json({
-       links: [
+function transactionHateoas(){
+    return  [
         {
             href: "/lib/transactions",
             rel : "transactions",
@@ -109,7 +104,32 @@ function transactionHateoas(req,res){
             rel : "transactions",
             type: "GET"
         }    
-        ]
-    });
+        ];
 }
-export default { libraryHateoas,booksHateoas,userHateoas,transactionHateoas};
+function getUserLinks(userId){
+    return {
+        self: { href: `/lib/users/${userId}` },
+        update: { href: `/lib/users/${userId}`, method: "PATCH" },
+        delete: { href: `/lib/users/${userId}`, method: "DELETE" },
+        all: { href: "/lib/users", method: "GET" }
+    };  
+}
+
+function getBookLinks(bookId){
+    return {
+        self: { href: `/lib/books/${bookId}` },
+        update: { href: `/lib/books/${bookId}`, method: "PATCH" },
+        delete: { href: `/lib/books/${bookId}`, method: "DELETE" },
+        all: { href: "/lib/books", method: "GET" }
+    };
+}
+
+function getTransactionLinks(transaction_id) {
+    return {
+        self: { href: `/lib/transactions/${transaction_id}` },
+        update: { href: `/lib/transactions/${transaction_id}`, method: "PATCH" },
+        delete: { href: `/lib/transactions/${transaction_id}`, method: "DELETE" },
+        all: { href: "/lib/transactions", method: "GET" }
+    };
+}
+export default { libraryHateoas,booksHateoas,userHateoas,transactionHateoas,getTransactionLinks,getBookLinks,getUserLinks};

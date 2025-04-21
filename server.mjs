@@ -29,9 +29,6 @@ app.use('/lib/transactions',transactionRouter);
 
 // Basic Hateoas
 app.get('/',hateoas.libraryHateoas);
-app.get(/^\/lib\/book(?!s$).*/, hateoas.booksHateoas);
-app.get(/^\/lib\/user(?!s$).*/,hateoas.userHateoas);
-app.get(/^\/lib\/transaction(?!s$).*/,hateoas.transactionHateoas);
 
 // transaction by userId or bookId
 app.get('/transactions/users/:userId',transactionRouter);
